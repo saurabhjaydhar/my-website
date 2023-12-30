@@ -8,16 +8,16 @@ export default function Logo(props: { finishedLoading: boolean }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{
           type: "spring",
-          y: { delay: props.finishedLoading ? 0 : 8, duration: 0 },
-          opacity: { delay: props.finishedLoading ? 0 : 8, duration: 0 },
+          y: { delay: props.finishedLoading ? 0 : 5, duration: 0 },
+          opacity: { delay: props.finishedLoading ? 0 : 5, duration: 0 },
         }}
         className=" relative h-12 w-10 "
       >
         <motion.span
           initial={{ x: 1 }}
-          className="absolute h-full w-full flex justify-center items-center text-lg font-Header text-AAsecondary"
+          className="absolute h-full w-full flex justify-center items-center text-base font-Header text-AAsecondary tracking-tighter"
         >
-          A
+         SJ
         </motion.span>
 
         <motion.div animate={{ rotate: -30, y: 5 }} className="h-1 w-6 rounded bg-AAsecondary"></motion.div>

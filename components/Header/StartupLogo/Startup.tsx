@@ -107,9 +107,9 @@ const Startup = (props) => {
           initial={{ scale: 0, y: -4 ,x:-1}}
           animate={{ scale: 1 }}
           transition={{ scale: { delay: 1.5, duration: 1.5 } }}
-          className="text-AAsecondary font-Text2 text-4xl"
+          className="text-AAsecondary font-Text2 text-xl tracking-tighter"
         >
-          A
+          Jaydhar
         </motion.span>
       </motion.div>
     </motion.div>

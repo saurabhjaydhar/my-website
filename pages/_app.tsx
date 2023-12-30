@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AppContext.Provider value={{ sharedState, setSharedState }}>
       <Component {...pageProps} />
-      <Analytics />
+      {/* <Analytics /> */}
     </AppContext.Provider>
   );
 }

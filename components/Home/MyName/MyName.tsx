@@ -14,7 +14,7 @@ export default function MyName(props: { finishedLoading: boolean }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{
           opacity: {
-            delay: props.finishedLoading ? 0 : 10.4,
+            delay: props.finishedLoading ? 0 : 6.4,
             duration: props.finishedLoading ? 0 : 0.2,
           },
           y: {
@@ -31,7 +31,7 @@ export default function MyName(props: { finishedLoading: boolean }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{
           opacity: {
-            delay: props.finishedLoading ? 0 : 10.5,
+            delay: props.finishedLoading ? 0 : 6.5,
             duration: props.finishedLoading ? 0 : 0.2,
           },
           y: {
@@ -48,7 +48,7 @@ export default function MyName(props: { finishedLoading: boolean }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{
           opacity: {
-            delay: props.finishedLoading ? 0 : 10.6,
+            delay: props.finishedLoading ? 0 : 6.6,
             duration: props.finishedLoading ? 0 : 0.2,
           },
           y: {
@@ -66,11 +66,11 @@ export default function MyName(props: { finishedLoading: boolean }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{
           opacity: {
-            delay: props.finishedLoading ? 0 : 10.7,
+            delay: props.finishedLoading ? 0 : 6.7,
             duration: props.finishedLoading ? 0 : 0.2,
           },
           y: {
-            delay: props.finishedLoading ? 0 : 10.7,
+            delay: props.finishedLoading ? 0 : 6.7,
             duration: props.finishedLoading ? 0 : 0.2,
           },
         }}
@@ -95,11 +95,11 @@ export default function MyName(props: { finishedLoading: boolean }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{
           opacity: {
-            delay: props.finishedLoading ? 0 : 10.8,
+            delay: props.finishedLoading ? 0 : 6.8,
             duration: props.finishedLoading ? 0 : 0.2,
           },
           y: {
-            delay: props.finishedLoading ? 0 : 10.8,
+            delay: props.finishedLoading ? 0 : 6.8,
             duration: props.finishedLoading ? 0 : 0.2,
           },
         }}

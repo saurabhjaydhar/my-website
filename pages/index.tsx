@@ -85,34 +85,49 @@ export default function Home() {
       window.removeEventListener("resize", context.sharedState.typing.eventInputLostFocus);
       document.removeEventListener("keydown", context.sharedState.typing.keyboardEvent);
     }
-    setTimeout(() => {
-      setShowElement(true);
-    }, 4500);
+    // setTimeout(() => {
+    //   setShowElement(true);
+    // }, 500);
 
-    setTimeout(() => {
-      setShowThisCantBeReached(false);
-    }, 5400);
+    // setTimeout(() => {
+    //   setShowThisCantBeReached(false);
+    // }, 5400);
+
+
+    
     // ? INFORMATIONAL next function will show the component after changing the state of ShowMe
     setTimeout(() => {
-      setShowElement(false);
+      // setShowElement(false);
       setShowMe(true);
       context.sharedState.finishedLoading = true;
       context.setSharedState(context.sharedState);
-    }, 10400);
+      console.log('genew')
+    }, 6000);
   }, [context, context.sharedState]);
 
   useEffect(() => {
     Aos.init({ duration: 2000, once: true });
   }, []);
 
+  // const [isLoaded,setIsLoaded]=useState(false);
+
+  // useEffect(()=>{
+
+  //   setTimeout(() => {
+  //     setIsLoaded(false)
+  //   }, 1000);
+  // },)
+
   console.log("website is rendering...");
   const meta = {
     title: "Saurabh Jaydhar - Software Engineer",
-    description: `I've been working on Software development for 5 years straight. Get in touch with me to know more.`,
-    image: "/titofCercle.png",
+    description: `I've been working on Software development for 4 years straight. Get in touch with me to know more.`,
+    image: "/profile.jpg",
     type: "website",
   };
   const isProd = process.env.NODE_ENV === "production";
+
+  console.log('omgdata',context.sharedState)
 
   return (
     <>
@@ -136,15 +151,17 @@ export default function Home() {
 
       {!isBlackListed ? (
         <div className="relative snap-mandatory min-h-screen bg-AAprimary w-full ">
-          {context.sharedState.finishedLoading ? <></> : ShowThisCantBeReached ? <ThisCantBeReached /> : <></>}
-          {context.sharedState.finishedLoading ? <></> : ShowElement ? <Startup /> : <></>}
+          {/* {context.sharedState.finishedLoading ? <></> : ShowThisCantBeReached ? <ThisCantBeReached /> : <></>} */}
+          {/* {context.sharedState.finishedLoading ? <></> : ShowElement ? <Startup /> : <></>}
+           */}
+           <Startup />
           <Header finishedLoading={context.sharedState.finishedLoading} sectionsRef={homeRef} />
           <MyName finishedLoading={context.sharedState.finishedLoading} />
-           <SocialMediaArround finishedLoading={context.sharedState.finishedLoading} />
-          {context.sharedState.finishedLoading ? <AboutMe ref={aboutRef} /> : <></>}
-          {context.sharedState.finishedLoading ? <WhereIHaveWorked /> : <></>}
-          {context.sharedState.finishedLoading ? <SomethingIveBuilt /> : <></>}
-          {context.sharedState.finishedLoading ? <GetInTouch /> : <></>}
+          <SocialMediaArround finishedLoading={context.sharedState.finishedLoading} />
+          {context.sharedState.finishedLoading? <AboutMe ref={aboutRef} /> : <></>}
+          {context.sharedState.finishedLoading? <WhereIHaveWorked /> : <></>}
+          {context.sharedState.finishedLoading? <SomethingIveBuilt /> : <></>}
+          {context.sharedState.finishedLoading? <GetInTouch /> : <></>}
           {/* {context.sharedState.finishedLoading ? (
             <Footer githubUrl={"https://github.com/hktitof/my-website"} hideSocialsInDesktop={true} />
           ) : (
