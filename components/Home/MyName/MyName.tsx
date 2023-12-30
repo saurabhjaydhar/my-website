@@ -13,8 +13,14 @@ export default function MyName(props: { finishedLoading: boolean }) {
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
-          opacity: { delay: props.finishedLoading ? 0 : 10.4, duration: props.finishedLoading ? 0 : 0.2 },
-          y: { delay: props.finishedLoading ? 0 : 10.4, duration: props.finishedLoading ? 0 : 0.2 },
+          opacity: {
+            delay: props.finishedLoading ? 0 : 10.4,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
+          y: {
+            delay: props.finishedLoading ? 0 : 10.4,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
         }}
         className="text-AAsecondary font-mono"
       >
@@ -24,19 +30,31 @@ export default function MyName(props: { finishedLoading: boolean }) {
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
-          opacity: { delay: props.finishedLoading ? 0 : 10.5, duration: props.finishedLoading ? 0 : 0.2 },
-          y: { delay: props.finishedLoading ? 0 : 10.5, duration: props.finishedLoading ? 0 : 0.2 },
+          opacity: {
+            delay: props.finishedLoading ? 0 : 10.5,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
+          y: {
+            delay: props.finishedLoading ? 0 : 10.5,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
         }}
         className="text-gray-300 font-bold text-3xl lg:text-7xl sm:text-5xl md:text-6xl mt-4"
       >
-        Anaflous Abdellatif.
+        Saurabh Jaydhar.
       </motion.h1>
       <motion.h2
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
-          opacity: { delay: props.finishedLoading ? 0 : 10.6, duration: props.finishedLoading ? 0 : 0.2 },
-          y: { delay: props.finishedLoading ? 0 : 10.6, duration: props.finishedLoading ? 0 : 0.2 },
+          opacity: {
+            delay: props.finishedLoading ? 0 : 10.6,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
+          y: {
+            delay: props.finishedLoading ? 0 : 10.6,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
         }}
         className="text-gray-400 font-bold text-3xl lg:text-7xl sm:text-5xl md:text-6xl mt-4"
       >
@@ -47,18 +65,28 @@ export default function MyName(props: { finishedLoading: boolean }) {
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
-          opacity: { delay: props.finishedLoading ? 0 : 10.7, duration: props.finishedLoading ? 0 : 0.2 },
-          y: { delay: props.finishedLoading ? 0 : 10.7, duration: props.finishedLoading ? 0 : 0.2 },
+          opacity: {
+            delay: props.finishedLoading ? 0 : 10.7,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
+          y: {
+            delay: props.finishedLoading ? 0 : 10.7,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
         }}
         className="text-gray-400 font-Header text-sm md:text-lg sm:text-md mt-10 tracking-wider"
       >
-        I&apos;m a <span className="text-AAsecondary">software engineer</span>, i possess strong problem-solving skills and
-        specialize in crafting exceptional <br className="2xl:block hidden" />
-        digital experiences. My current area of focus is in the <span className="text-AAsecondary">web3 domain</span>,
-        where I actively engage in developing <br className="2xl:block hidden"/>
-        and designing immersive <span className="text-AAsecondary">web3 applications</span>. This involves working with{" "}
-        <span className="text-AAsecondary">Smart Contracts</span>  on the{" "}
-        <span className="text-AAsecondary">Blockchain</span>. 
+        I&apos;m a <span className="text-AAsecondary">software engineer</span>,
+        i possess strong problem-solving skills and specialize in crafting
+        exceptional <br className="2xl:block hidden" />
+        digital experiences. Passionate and results-driven professional with
+        four years of hands-on experience in crafting 
+        <span className="text-AAsecondary">high-performance,
+        scalable, and visually appealing mobile applications using Flutter.</span>
+        Proficient in a diverse range of technologies, including <br className="2xl:block hidden" />
+       
+        <span className="text-AAsecondary">React, Java,
+        Node.js, and Next.js.</span>.
         {/* <br className="2xl:block hidden" />creating and deploying them, as well as implementing the
         front-end components to enable seamless user interactions. */}
       </motion.h3>
@@ -66,8 +94,14 @@ export default function MyName(props: { finishedLoading: boolean }) {
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
-          opacity: { delay: props.finishedLoading ? 0 : 10.8, duration: props.finishedLoading ? 0 : 0.2 },
-          y: { delay: props.finishedLoading ? 0 : 10.8, duration: props.finishedLoading ? 0 : 0.2 },
+          opacity: {
+            delay: props.finishedLoading ? 0 : 10.8,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
+          y: {
+            delay: props.finishedLoading ? 0 : 10.8,
+            duration: props.finishedLoading ? 0 : 0.2,
+          },
         }}
         className="mt-12"
       >

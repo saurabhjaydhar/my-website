@@ -25,54 +25,54 @@ export default function Home() {
   const homeRef = useRef<HTMLDivElement>(null);
 
   // userData state that will be used to get usr location
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
 
   // check if user from Black List
   const [isBlackListed, setIsBlackListed] = useState(false);
 
   // check if NEXT_PUBLC_BLACKLIST_COUNTRIES is empty
-  const [IsBlackListEmpty, setIsBlackListEmpty] = useState(
-    process.env.NEXT_PUBLIC_BLACKLIST_COUNTRIES === "" ? true : false
-  );
+  // const [IsBlackListEmpty, setIsBlackListEmpty] = useState(
+  //   process.env.NEXT_PUBLIC_BLACKLIST_COUNTRIES === "" ? true : false
+  // );
 
   // this userEffect will be called to get the user location, so we can check if he is from the blackList,
   // this will only run if NEXT_PUBLIC_BLACKLIST_COUNTRIES is not empty
-  useEffect(() => {
-    if (!IsBlackListEmpty) {
-      const fetchData = async () => {
-        try {
-          const IP_Address = async () => {
-            return fetch("https://api.ipify.org/?format=json")
-              .then(res => res.json())
-              .then(data => data.ip);
-          };
+  // useEffect(() => {
+  //   if (!IsBlackListEmpty) {
+  //     const fetchData = async () => {
+  //       try {
+  //         const IP_Address = async () => {
+  //           return fetch("https://api.ipify.org/?format=json")
+  //             .then(res => res.json())
+  //             .then(data => data.ip);
+  //         };
 
-          const response = await fetch("/api/userInfoByIP/" + (await IP_Address())); // Replace with your actual API endpoint
-          const data = await response.json();
-          setUserData(data);
-        } catch (error) {
-          console.error("Error fetching data location and ip address:", error);
-          // Handle errors as needed
-        }
-      };
+  //         const response = await fetch("/api/userInfoByIP/" + (await IP_Address())); // Replace with your actual API endpoint
+  //         const data = await response.json();
+  //         setUserData(data);
+  //       } catch (error) {
+  //         console.error("Error fetching data location and ip address:", error);
+  //         // Handle errors as needed
+  //       }
+  //     };
 
-      fetchData();
-    }
-  }, [IsBlackListEmpty]); // Empty dependency array ensures that this effect runs once when the component mounts
+  //     fetchData();
+  //   }
+  // }, [IsBlackListEmpty]); // Empty dependency array ensures that this effect runs once when the component mounts
 
   // this useEffect will be called when userData is set
-  useEffect(() => {
-    // this will only run if NEXT_PUBLIC_BLACKLIST_COUNTRIES is not empty
-    if (!IsBlackListEmpty) {
-      if (userData) {
-        // check if the user country is in the blackList
-        if (process.env.NEXT_PUBLIC_BLACKLIST_COUNTRIES.includes(userData.country)) {
-          // set isBlackListed to true
-          setIsBlackListed(true);
-        }
-      }
-    }
-  }, [IsBlackListEmpty, userData]);
+  // useEffect(() => {
+  //   // this will only run if NEXT_PUBLIC_BLACKLIST_COUNTRIES is not empty
+  //   if (!IsBlackListEmpty) {
+  //     if (userData) {
+  //       // check if the user country is in the blackList
+  //       if (process.env.NEXT_PUBLIC_BLACKLIST_COUNTRIES.includes(userData.country)) {
+  //         // set isBlackListed to true
+  //         setIsBlackListed(true);
+  //       }
+  //     }
+  //   }
+  // }, [IsBlackListEmpty, userData]);
 
   useEffect(() => {
     // remove the interval Cookie timer setter when
@@ -107,7 +107,7 @@ export default function Home() {
 
   console.log("website is rendering...");
   const meta = {
-    title: "Abdellatif Anaflous - Software Engineer",
+    title: "Saurabh Jaydhar - Software Engineer",
     description: `I've been working on Software development for 5 years straight. Get in touch with me to know more.`,
     image: "/titofCercle.png",
     type: "website",
@@ -140,16 +140,16 @@ export default function Home() {
           {context.sharedState.finishedLoading ? <></> : ShowElement ? <Startup /> : <></>}
           <Header finishedLoading={context.sharedState.finishedLoading} sectionsRef={homeRef} />
           <MyName finishedLoading={context.sharedState.finishedLoading} />
-          <SocialMediaArround finishedLoading={context.sharedState.finishedLoading} />
+           <SocialMediaArround finishedLoading={context.sharedState.finishedLoading} />
           {context.sharedState.finishedLoading ? <AboutMe ref={aboutRef} /> : <></>}
           {context.sharedState.finishedLoading ? <WhereIHaveWorked /> : <></>}
           {context.sharedState.finishedLoading ? <SomethingIveBuilt /> : <></>}
           {context.sharedState.finishedLoading ? <GetInTouch /> : <></>}
-          {context.sharedState.finishedLoading ? (
+          {/* {context.sharedState.finishedLoading ? (
             <Footer githubUrl={"https://github.com/hktitof/my-website"} hideSocialsInDesktop={true} />
           ) : (
             <></>
-          )}
+          )} */}
           {!isProd && <ScreenSizeDetector />}
         </div>
       ) : (

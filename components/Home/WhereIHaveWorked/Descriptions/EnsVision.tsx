@@ -5,9 +5,14 @@ import { getTasksTextWithHighlightedKeyword } from "./taskAndType";
 export default function EnsVision() {
   const tasks = [
     {
-      text: "Worked on the front-end development in the web3 domain using Next.js, Alchemy, Tailwind CSS, Wagmi, Web3.js, Moralis, Ethers.js",
-      keywords: ["Alchemy", "Wagmi", "Web3.js", "Moralis", "Ethers.js"],
+      text: "Worked in the mobile app development using Java, Flutter, Firebase",
+      keywords: ["Java", "Flutter", "Firebase", "Moralis", "Ethers.js"],
     },
+    {
+      text: "Worked on the front-end development in web application using Next.js, React js, Tailwind CSS",
+      keywords: ["Next.js, React js, Tailwind CSS"],
+    },
+ 
     {
       text: "Conducted testing tasks to ensure website functionality and quality. Managed a large user base on the website",
       keywords: ["quality", "testing tasks", "user base"],
@@ -17,8 +22,8 @@ export default function EnsVision() {
       keywords: ["website design"],
     },
     {
-      text: "Collaborated closely with the team in regular meetings and interacted with smart contracts and gained expertise in ENS",
-      keywords: ["smart contracts", "ENS"],
+      text: "Collaborated closely with the team in regular meetings ",
+      keywords: ["Collaborated"],
     },
   ];
 
@@ -28,17 +33,17 @@ export default function EnsVision() {
         <div className="flex flex-col spacey-y-2">
           {/* Title */}
           <span className="text-gray-100 sm:text-lg text-sm font-Arimo tracking-wide">
-            Software Engineer <span className="text-AAsecondary">@ web3</span>
+            Software Developer <span className="text-AAsecondary"></span>
           </span>
           {/* Date */}
-          <span className="font-mono text-xs text-gray-500">Dec 2022 - Jun 2023</span>
+          <span className="font-mono text-xs text-gray-500">July 2020 - Present</span>
           <span
             className="font-mono text-xs text-AAsecondary hover:cursor-pointer"
             style={{ fontSize: "0.6rem" }}
             // set on click to open the website
-            onClick={() => window.open("https://www.ens.vision/", "_blank")}
+            onClick={() => window.open("https://nextwebguru.com/", "_blank")}
           >
-            www.ens.vision
+            www.nextwebguru.com
           </span>
         </div>
         <div className="flex flex-col space-y-4 sm:text-sm text-xs">
