@@ -154,7 +154,8 @@ export default function Home() {
           {/* {context.sharedState.finishedLoading ? <></> : ShowThisCantBeReached ? <ThisCantBeReached /> : <></>} */}
           {/* {context.sharedState.finishedLoading ? <></> : ShowElement ? <Startup /> : <></>}
            */}
-           <Startup />
+        {context.sharedState.finishedLoading ? <></> :   <Startup />}
+           {/* {context.sharedState.finishedLoading ? <></> : ShowElement ? <Startup /> : <></>} */}
           <Header finishedLoading={context.sharedState.finishedLoading} sectionsRef={homeRef} />
           <MyName finishedLoading={context.sharedState.finishedLoading} />
           <SocialMediaArround finishedLoading={context.sharedState.finishedLoading} />
