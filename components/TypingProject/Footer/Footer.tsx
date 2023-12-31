@@ -22,39 +22,39 @@ export default function Fotter(props:{link:string,className:string}) {
         {/* // ? Reach me at */}
         <div className="flex flex-row space-x-8">
           <ClickableIcon
-            href={"https://github.com/hktitof"}
+            href={"https://github.com/saurabhjaydhar"}
             Icon={GithubIcon}
           />
           <ClickableIcon
-            href={"https://www.linkedin.com/in/abdellatif-anaflous/"}
+            href={"https://www.linkedin.com/in/saurabh-jaydhar-044b76233/"}
             Icon={LinkedinIcon}
           />
-          <ClickableIcon
+          {/* <ClickableIcon
             href={"https://www.instagram.com/titof_abdo/"}
             Icon={InstagramIcon}
-          />
-          <ClickableIcon
+          /> */}
+          {/* <ClickableIcon
             href={"https://www.youtube.com/c/NTTFT"}
             Icon={YoutubeIcon}
-          />
+          /> */}
         </div>
-        <a href={props.link} className="" target={"_blank"} rel="noreferrer">
+        <a className="" target={"_blank"} rel="noreferrer">
           <div
             className="group flex flex-col font-mono justify-center items-center  text-gray-400 
     text-sm  space-y-2  "
           >
             <span className="group-hover:text-AAsecondary sm:text-sm text-xs">
-              Designed & Built by Anaflous Abdellatif
+              Designed & Built by Saurabh Jaydhar
             </span>
 
-            <span className="text-xs flex flex-row items-center space-x-2 group-hover:text-AAsecondary">
+            {/* <span className="text-xs flex flex-row items-center space-x-2 group-hover:text-AAsecondary">
               <GithubIcon
                 className={
                   "w-4 h-4 text-gray-400 fill-current group-hover:text-AAsecondary duration-800"
                 }
               />
               <span className="">Source code - Github</span>
-            </span>
+            </span> */}
           </div>
         </a>
       </div>

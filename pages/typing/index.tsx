@@ -280,7 +280,7 @@ export default function Home() {
             statistics={statistics}
             timeToType={timeToType}
           />
-          <Footer className="pt-16" link="https://github.com/hktitof/Typing" />
+          <Footer className="pt-16" link="" />
         </>
       )}
     </div>
