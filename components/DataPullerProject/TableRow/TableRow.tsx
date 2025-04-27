@@ -1,17 +1,18 @@
 import React from "react";
+
 type Props = {
-  item: { title; value };
+  item: {
+    title: string;
+    value: string;
+  };
 };
+
 // repeated  table row code for setting General Information ip address,city,Zip Code ...etc
-export default function TableRow(props:Props) {
+export default function TableRow(props: Props) {
   return (
-    <tr className="border-2 border-gray-300">
-      <td className=" border-2 border-gray-300 pl-2 md:pl-4 py-3 text-xs md:text-base w-28 md:w-auto">
-        {props.item.title}
-      </td>
-      <td className="pl-4 text-AAsecondary text-xs md:text-base">
-        {props.item.value}
-      </td>
+    <tr className="border-2">
+      <td className="border-2 py-1 px-8">{props.item.title} :</td>
+      <td className="text-AAsecondary px-8">{props.item.value}</td>
     </tr>
   );
 }

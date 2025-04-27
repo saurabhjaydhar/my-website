@@ -1,68 +1,28 @@
-import React from 'react'
-type Props = {
-minTens,
-minUnits,
-secTens,
-secUnits,
+import React from 'react';
+
+interface TimerProps {
+  secUnits: React.RefObject<HTMLSpanElement>;
+  secTens: React.RefObject<HTMLSpanElement>;
+  minUnits: React.RefObject<HTMLSpanElement>;
+  minTens: React.RefObject<HTMLSpanElement>;
 }
-export default function Timer(props:Props) {
+
+export default function Timer({
+  secUnits,
+  secTens,
+  minUnits,
+  minTens,
+}: TimerProps) {
   return (
-    <div className="w-full">
-    <div className="flex flex-col space-y-1">
-      <span className="sm:text-xl">Time you spent</span>
-      <div className="flex flex-row space-x-4 justify-center ">
-        <div className="flex flex-col spacey-y-1 items-center">
-          <div className="flex flex-row space-x-1">
-            <div className="flex flex-col space-y-1 items-center">
-              <div className="sm:w-8 w-6 sm:h-10 h-8 border-[1.5px] border-AAsecondary rounded flex justify-center items-center">
-                <span
-                  ref={props.minTens}
-                  className="text-white font-mono sm:text-2xl text-sm"
-                >
-                  0
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col space-y-1 items-center">
-              <div className="sm:w-8 w-6 sm:h-10 h-8 border-[1.5px] border-AAsecondary rounded flex justify-center items-center">
-                <span
-                  ref={props.minUnits}
-                  className="text-white font-mono sm:text-2xl text-sm"
-                >
-                  0
-                </span>
-              </div>
-            </div>
-          </div>
-          <span className="m:text-base text-sm">Minutes</span>
-        </div>
-        <div className="flex flex-col spacey-y-1 items-center">
-          <div className="flex flex-row space-x-1">
-            <div className="flex flex-col space-y-1 items-center">
-              <div className="sm:w-8 w-6 sm:h-10 h-8 border-[1.5px] border-AAsecondary rounded flex justify-center items-center">
-                <span
-                  ref={props.secTens}
-                  className="text-white font-mono sm:text-2xl text-sm"
-                >
-                  0
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col space-y-1 items-center">
-              <div className="sm:w-8 w-6 sm:h-10 h-8 border-[1.5px] border-AAsecondary rounded flex justify-center items-center">
-                <span
-                  ref={props.secUnits}
-                  className="text-white font-mono sm:text-2xl text-sm"
-                >
-                  0
-                </span>
-              </div>
-            </div>
-          </div>
-          <span className="sm:text-base text-sm">Seconds</span>
-        </div>
+    <div className="flex flex-col items-center space-y-2">
+      <div className="flex items-center space-x-2">
+        <span ref={minTens} className="text-2xl font-bold text-AAsecondary">0</span>
+        <span ref={minUnits} className="text-2xl font-bold text-AAsecondary">0</span>
+        <span className="text-2xl font-bold text-AAsecondary">:</span>
+        <span ref={secTens} className="text-2xl font-bold text-AAsecondary">0</span>
+        <span ref={secUnits} className="text-2xl font-bold text-AAsecondary">0</span>
       </div>
+      <p className="text-sm text-gray-400">Time spent on this page</p>
     </div>
-  </div>
-  )
+  );
 }

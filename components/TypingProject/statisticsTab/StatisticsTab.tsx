@@ -1,7 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Statistics } from "../Types/types";
 
-const getTopScore = (st: Statistics) => {
+const getTopScore = (st: Statistics): number | null => {
   if (st.length > 1) {
     const statics = [...st.slice(0).reverse()];
     let topScore = statics[0].wpm;
@@ -18,7 +19,7 @@ const getTopScore = (st: Statistics) => {
   }
 };
 
-const isTopScore = (index: number, statistics: Statistics) => {
+const isTopScore = (index: number, statistics: Statistics): JSX.Element => {
   const result = getTopScore(statistics);
   return result == null ? (
     <></>
@@ -34,19 +35,19 @@ const isTopScore = (index: number, statistics: Statistics) => {
   ) : (
     <></>
   );
- 
 };
 
-type Statistics = [{ round: number; wpm: number; accuracy: number }?];
+interface StatisticsTabProps {
+  statistics: Statistics[0];
+  round: number;
+  finishedTime: string;
+}
+
 export default function StatisticsTab({
   statistics,
   round,
   finishedTime,
-}: {
-  round: number;
-  finishedTime: string;
-  statistics: Statistics;
-}) {
+}: StatisticsTabProps) {
   console.log("score list : ", statistics);
   return (
     <>
@@ -78,47 +79,26 @@ export default function StatisticsTab({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-AAsecondary">
-                  {statistics
-                    .slice(0)
-                    .reverse()
-                    .map((item, index) => {
-                      return index == 0 ? (
-                        <motion.tr
-                          key={index}
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{
-                            default: {
-                              duration: 0.3,
-                              ease: [0, 0.71, 0.2, 1.01],
-                            },
-                            scale: {
-                              type: "spring",
-                              damping: 5,
-                              stiffness: 100,
-                              restDelta: 0.001,
-                            },
-                          }}
-                        >
-                          <td className="px-6 py-4 text-sm font-medium  whitespace-nowrap">{item.round}</td>
-                          <td className="px-6 py-4 text-sm flex sm:flex-row  flex-col   whitespace-nowrap">
-                            <span className="sm:order-2 order-1 sm:pl-2">{isTopScore(index, statistics)}</span>
-                            <span>{item.wpm} wpm </span>
-                          </td>
-
-                          <td className="px-6 py-4 text-sm text-left  whitespace-nowrap">{item.accuracy}%</td>
-                        </motion.tr>
-                      ) : (
-                        <tr key={index}>
-                          <td className="px-6 py-4 text-sm font-medium  whitespace-nowrap">{item.round}</td>
-                          <td className="px-6 py-4 text-sm flex sm:flex-row flex-col  whitespace-nowrap">
-                            <span className="sm:order-2 order-1 sm:pl-2">{isTopScore(index, statistics)}</span>
-                            <span>{item.wpm} wpm </span>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-left  whitespace-nowrap">{item.accuracy}%</td>
-                        </tr>
-                      );
-                    })}
+                  <motion.tr
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      default: {
+                        duration: 0.3,
+                        ease: [0, 0.71, 0.2, 1.01],
+                      },
+                      scale: {
+                        type: "spring",
+                        damping: 5,
+                        stiffness: 100,
+                        restDelta: 0.001,
+                      },
+                    }}
+                  >
+                    <td className="px-6 py-4 text-sm whitespace-nowrap">{statistics.round}</td>
+                    <td className="px-6 py-4 text-sm whitespace-nowrap">{statistics.wpm}</td>
+                    <td className="px-6 py-4 text-sm whitespace-nowrap">{statistics.accuracy}%</td>
+                  </motion.tr>
                 </tbody>
               </table>
             </div>

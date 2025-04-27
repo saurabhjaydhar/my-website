@@ -1,10 +1,15 @@
 import React from "react";
 import Img from "../../../components/smallComp/image/Img";
 import ArrowIcon from "../../../components/Icons/ArrowIcon";
-export default function AboutMe(props) {
+
+interface AboutMeProps {
+  ref?: React.RefObject<HTMLDivElement>;
+}
+
+export default function AboutMe(props: AboutMeProps) {
   const technologies = [
-    ["Android","Flutter","Next.js", "JavaScript (ES6+)", "Tailwind CSS",],
-    ["Firebase","Node.js", "TypeScript", "Framer Motion", ],
+    ["React JS","Vue JS","Next JS", "Node.js","Mongo DB",],
+    ["JavaScript (ES6+)", "TypeScript", "Firebase", "Tailwind CSS","Framer Motion", ],
   ];
   return (
     <div
@@ -53,26 +58,19 @@ export default function AboutMe(props) {
                 am dedicated to creating innovative and user-friendly mobile
                 applications that deliver exceptional user experiences.
                 <br />  <br /> <span className="text-AAsecondary"> Key Skills:   <br /> </span>
-                Android App Development Flutter Framework React.js Development
-                UI/UX Design Principles Cross-platform Development API
-                Integration Agile Methodologies Problem Solving and Debugging
-                Experience: I bring [X years] of hands-on experience in
-                developing robust and scalable mobile applications. My track
-                record includes successful projects where I have demonstrated
-                proficiency in translating complex business requirements into
-                efficient and intuitive app functionalities. I am adept at
-                collaborating with cross-functional teams and thrive in dynamic,
-                fast-paced environments. Technical Proficiency: Android Studio
-                Kotlin Java Flutter/Dart React.js/React Native Git/GitHub
-                RESTful APIs Why Hire Me: Proven expertise in Android, Flutter,
-                and React.js development. Strong problem-solving skills and
-                ability to adapt to new technologies. A collaborative team
-                player with excellent communication skills. Commitment to
-                delivering high-quality, user-centric applications. Let us
-                Connect: I am eager to contribute my skills to a
-                forward-thinking team. Let us discuss how my experience and
-                passion for mobile app development can bring value to your
-                organization.
+                As a seasoned full stack developer, I bring extensive experience in building and deploying scalable web and mobile applications using the MERN (MongoDB, Express.js, React.js, Node.js) and MEVN (MongoDB, Express.js, Vue.js, Node.js) stacks. My proficiency encompasses front-end technologies like HTML5, CSS3, JavaScript (ES6+), React.js, and Vue.js, coupled with back-end expertise in Node.js and Express.js. I have a strong command of database management with both NoSQL (MongoDB) and SQL databases, ensuring efficient data storage and retrieval.​
+futuristiccodingacademy.com
++1
+Huntr
++1
+
+In the mobile development arena, I have successfully developed cross-platform applications using Flutter, delivering seamless user experiences across Android and iOS platforms. My portfolio includes diverse projects such as e-commerce platforms, newspaper applications, fleet management systems, and taxpaying solutions, each tailored to meet specific client requirements and industry standards.​
+
+I am adept at integrating RESTful APIs, implementing state management solutions like Redux and Vuex, and utilizing version control systems such as Git for collaborative development. My experience extends to deploying applications on cloud platforms, ensuring high availability and scalability. I prioritize writing clean, maintainable code and adhere to best practices in software development, including test-driven development and continuous integration/continuous deployment (CI/CD) pipelines.​
+
+Beyond technical skills, I possess strong problem-solving abilities, effective communication, and a collaborative mindset, enabling me to work efficiently in team environments and adapt to evolving project needs. My commitment to continuous learning keeps me abreast of emerging technologies and industry trends, ensuring that I deliver innovative and effective solutions.​
+
+
               </span>
             </div>
             {/* <div className="font-Header tracking-wide">
@@ -142,7 +140,7 @@ export default function AboutMe(props) {
             <div className="absolute w-5/6 h-5/6  rounded overflow-hidden">
               <div className="absolute w-full h-full group-hover:opacity-0 bg-AAsecondary opacity-10 duration-300 rounded overflow-hidden"></div>
               <Img
-                src={"/profile.jpg"}
+                src={"/profile.jpeg"}
                 className={"object-contain rounded-lg"}
                 alt="My Image Not Found"
               />
@@ -153,7 +151,7 @@ export default function AboutMe(props) {
             <div className="absolute w-48 h-full  rounded  translate-x-5 translate-y-5 border-2 border-AAsecondary"></div>
             <div className="absolute w-48 h-full rounded overflow-hidden">
               <Img
-                src={"/profile.jpg"}
+                src={"/profile.jpeg"}
                 className={"object-contain rounded-lg"}
                 alt="My Image Not Found"
               />

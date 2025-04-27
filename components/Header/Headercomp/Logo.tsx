@@ -1,32 +1,27 @@
 import React from "react";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
-export default function Logo(props: { finishedLoading: boolean }) {
+import { motion } from "framer-motion";
+
+interface LogoProps {
+  finishedLoading: boolean;
+}
+
+const Logo: React.FC<LogoProps> = ({ finishedLoading }) => {
   return (
     <>
       <motion.div
-        initial={{ y: 0, opacity: 0 }}
+        initial={{ y: -10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
-          type: "spring",
-          y: { delay: props.finishedLoading ? 0 : 5, duration: 0 },
-          opacity: { delay: props.finishedLoading ? 0 : 5, duration: 0 },
+          y: { duration: 0.5, ease: "easeOut" },
+          opacity: { duration: 0.5, ease: "easeOut" },
+          delay: finishedLoading ? 0 : 7,
         }}
-        className=" relative h-12 w-10 "
+        className="text-AAsecondary font-mono text-sm"
       >
-        <motion.span
-          initial={{ x: 1 }}
-          className="absolute h-full w-full flex justify-center items-center text-base font-Header text-AAsecondary tracking-tighter"
-        >
-         SJ
-        </motion.span>
-
-        <motion.div animate={{ rotate: -30, y: 5 }} className="h-1 w-6 rounded bg-AAsecondary"></motion.div>
-        <motion.div animate={{ rotate: 90, x: -10, y: 18 }} className="h-1 w-6 rounded bg-AAsecondary"></motion.div>
-        <motion.div animate={{ rotate: 30, y: 31 }} className="h-1 w-6 rounded bg-AAsecondary"></motion.div>
-        <motion.div animate={{ rotate: -30, y: 27, x: 19 }} className="h-1 w-6 rounded bg-AAsecondary"></motion.div>
-        <motion.div animate={{ rotate: 30, x: 19, y: -10 }} className="h-1 w-6 rounded bg-AAsecondary"></motion.div>
-        <motion.div animate={{ rotate: 90, x: 28, y: 2 }} className="h-1 w-6 rounded bg-AAsecondary"></motion.div>
+        Saurabh Jaydhar
       </motion.div>
     </>
   );
-}
+};
+
+export default Logo;

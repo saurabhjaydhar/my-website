@@ -1,59 +1,70 @@
-export default async function handler(req, res) {
-   const HasZipCode = obj => {
-      for (const x of obj) {
-        const elem = x.address_components;
-        if (!isNaN(elem[elem.length - 1].long_name.replaceAll(' ', ''))) {
-          return elem[elem.length - 1].long_name;
-        }
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+interface AddressComponent {
+  address_components: {
+    long_name: string;
+    short_name: string;
+    types: string[];
+  }[];
+}
+
+interface ApiResponse {
+  ip: string;
+  city: string;
+  region: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+  hasZipCode: boolean;
+}
+
+const HasZipCode = (obj: AddressComponent[]): boolean => {
+  for (const x of obj) {
+    const elem = x.address_components;
+    for (const y of elem) {
+      if (y.types.includes("postal_code")) {
+        return true;
       }
-      return "00000";
-    };
-    const getcoding = async (lat: string, lon: string) => {
-      return fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=` +
-          lat +
-          `,` +
-          lon +
-          `&key=` +
-          process.env.NEXT_PUBLIC_KEY_GOOGLE_API
-      )
-        .then(res => res.json())
-        .then(data => {
-          const result = data.results;
-          return HasZipCode(result);
-          // return data;
-        })
-        .catch(err => {
-          console.error("When fetching data from google api : \n", err);
-          return "00000";
-        });
-    };
-    const geolocation = async ip => {
-      return fetch(`http://ip-api.com/json/` + ip)
-        .then(res => res.json())
-        .then(async data => {
-          return  {
-            zip: await getcoding(data.lat, data.lon),
-            country: data.country,
-            countryCode: data.countryCode,
-            region: data.region,
-            regionName: data.regionName,
-            city: data.city,
-            datetime: new Date().toLocaleString("en-US", {
-              timeZone: data.timezone,
-            }),
-            lat: data.lat,
-            lon: data.lon,
-            timezone: data.timezone,
-            isp: data.isp,
-            org: data.org,
-            as: data.as,
-            query: data.query,
-          };
-         
-        })
-        .catch(err => console.log(err));
-    };
-    const result = await geolocation(req.query.userInfo);
-   res.status(200).json(result)
+    }
   }
+  return false;
+};
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ApiResponse | { error: string }>
+) {
+  try {
+    const response = await fetch(`https://ipapi.co/json/`);
+    const data = await response.json();
+    
+    if (data.error) {
+      res.status(500).json({ error: "Failed to fetch IP info" });
+      return;
+    }
+
+    const { latitude, longitude } = data;
+    const geocodeResponse = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
+    );
+    const geocodeData = await geocodeResponse.json();
+
+    if (geocodeData.error_message) {
+      res.status(500).json({ error: geocodeData.error_message });
+      return;
+    }
+
+    const hasZipCode = HasZipCode(geocodeData.results);
+    res.status(200).json({
+      ip: data.ip,
+      city: data.city,
+      region: data.region,
+      country: data.country_name,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      hasZipCode
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to process request" });
+  }
+}

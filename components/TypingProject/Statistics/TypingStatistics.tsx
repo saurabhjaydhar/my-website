@@ -1,20 +1,31 @@
+import React from 'react';
 import { motion } from "framer-motion";
 import StatisticsTab from "../statisticsTab/StatisticsTab";
 import RestartIcon from "../Icons/RestartIcon";
 import About from "../AboutComp/About";
 import { Statistics } from "../Types/types";
-import { MutableRefObject } from "react";
-type Props = {
+
+interface TypingStatisticsProps {
   restart: () => void;
   statistics: Statistics;
   roundCounter: number;
   timeToType: number;
-  seconds: MutableRefObject<number>;
-};
-export default function TypingStatistics(props: Props) {
+  seconds: React.MutableRefObject<number>;
+}
+
+export default function TypingStatistics({
+  restart,
+  statistics,
+  roundCounter,
+  timeToType,
+  seconds,
+}: TypingStatisticsProps) {
+  // Get the latest statistics entry
+  const latestStats = statistics[statistics.length - 1];
+
   return (
     <>
-      <section className=" w-full h-full flex flex-row sm:space-x-12 space-x-4 justify-center items-center pb-16">
+      <section className="w-full h-full flex flex-row sm:space-x-12 space-x-4 justify-center items-center pb-16">
         {/* Shortcuts mention */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
@@ -35,11 +46,11 @@ export default function TypingStatistics(props: Props) {
           transition={{ duration: 0.6 }}
           onClick={() => {
             console.log("Restarted By a click!!!!");
-            props.restart();
+            restart();
           }}
           className="group flex flex-row space-x-3 items-center hover:cursor-pointer"
         >
-          <div className="sm:h-8 sm:w-8 h-5 w-5 ">
+          <div className="sm:h-8 sm:w-8 h-5 w-5">
             <RestartIcon />
           </div>
           <span className="sm:text-lg text-sm font-mono text-gray-400 group-hover:text-AAsecondary duration-200 group-hover:translate-x-2">
@@ -48,11 +59,11 @@ export default function TypingStatistics(props: Props) {
         </motion.div>
       </section>
       {/* Round Statistics I caDetails */}
-      <section className=" w-full 2xl:px-96 xl:px-80 lg:px-64 md:px-28 sm:px-12 flex flex-col space-y-2">
+      <section className="w-full 2xl:px-96 xl:px-80 lg:px-64 md:px-28 sm:px-12 flex flex-col space-y-2">
         <StatisticsTab
-          statistics={props.statistics}
-          round={props.roundCounter}
-          finishedTime={(props.timeToType - props.seconds.current).toString()}
+          statistics={latestStats}
+          round={roundCounter}
+          finishedTime={(timeToType - seconds.current).toString()}
         />
       </section>
       <About />

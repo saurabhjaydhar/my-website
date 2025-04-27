@@ -76,14 +76,27 @@ export default function Home() {
 
   useEffect(() => {
     // remove the interval Cookie timer setter when
-    clearInterval(context.sharedState.userdata.timerCookieRef.current);
+    if (context.sharedState.userdata.timerCookieRef.current) {
+      clearInterval(context.sharedState.userdata.timerCookieRef.current);
+    }
     if (typeof window !== "undefined") {
       // remove UserDataPuller project EventListeners
-      window.removeEventListener("resize", context.sharedState.userdata.windowSizeTracker.current);
-      window.removeEventListener("mousemove", context.sharedState.userdata.mousePositionTracker.current, false);
+      const windowSizeTracker = context.sharedState.userdata.windowSizeTracker.current;
+      if (windowSizeTracker) {
+        window.removeEventListener("resize", windowSizeTracker);
+      }
+      
+      const mouseTracker = context.sharedState.userdata.mousePositionTracker.current;
+      if (mouseTracker) {
+        window.removeEventListener("mousemove", mouseTracker, false);
+      }
       // remove Typing project EventListeners
-      window.removeEventListener("resize", context.sharedState.typing.eventInputLostFocus);
-      document.removeEventListener("keydown", context.sharedState.typing.keyboardEvent);
+      if (context.sharedState.typing.eventInputLostFocus) {
+        window.removeEventListener("resize", context.sharedState.typing.eventInputLostFocus);
+      }
+      if (context.sharedState.typing.keyboardEvent) {
+        document.removeEventListener("keydown", context.sharedState.typing.keyboardEvent);
+      }
     }
     // setTimeout(() => {
     //   setShowElement(true);
@@ -160,7 +173,7 @@ export default function Home() {
           <MyName finishedLoading={context.sharedState.finishedLoading} />
           <SocialMediaArround finishedLoading={context.sharedState.finishedLoading} />
           {context.sharedState.finishedLoading? <AboutMe ref={aboutRef} /> : <></>}
-          {context.sharedState.finishedLoading? <WhereIHaveWorked /> : <></>}
+          {context.sharedState.finishedLoading? <WhereIHaveWorked finishedLoading={context.sharedState.finishedLoading} /> : <></>}
           {context.sharedState.finishedLoading? <SomethingIveBuilt /> : <></>}
           {context.sharedState.finishedLoading? <GetInTouch /> : <></>}
           {/* {context.sharedState.finishedLoading ? (

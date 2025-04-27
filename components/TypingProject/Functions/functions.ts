@@ -1,98 +1,53 @@
-import { wordsStatus,Data,ActiveWordWithIndex } from "../Types/types";
+import { WordDetail, Data, ActiveWordWithIndex, Statistics, CharAndColor } from "../Types/types";
 
 /**
  * @note use minLength & maxLength to limit the quote length
  * @default_URL : https://api.quotable.io/random?minLength=100&maxLength=140
  */
 export const getData = async (
-  arg_state: React.Dispatch<React.SetStateAction<Data>>,
+  setMyText: React.Dispatch<React.SetStateAction<Data>>,
   setActiveWordWithIndex: React.Dispatch<React.SetStateAction<ActiveWordWithIndex>>,
   setRoundCounter: React.Dispatch<React.SetStateAction<number>>,
   roundCounter: number
-) => {
-  fetch("/api/typing/10")
-    .then(response => response.json())
-    .then(data => {
-      // ?UNCOMMENT THIS TO MODIFY THE QUOTE FOR TESTING
-      // data.quote = "j";
-      const wordsAndStatus: wordsStatus = []; // this aaay will hold the words and their status
-      data.quote.split(" ").forEach((item: string, index: number) => {
-        const word = () => {
-          if (data.quote.split(" ").length - 1 == index) {
-            return item;
-          } else {
-            return item + " ";
-          }
-        };
-        wordsAndStatus.push({
-          word: word(),
-          indexFrom: 0,
-          indexTo: 0,
-        });
-      });
-      // getting index of the first char and last char in the text.
-      let LastIndex = 0;
-      wordsAndStatus.forEach((item, index) => {
-        if (index == 0) {
-          item.indexFrom = 0;
-          item.indexTo = item.word.length - 1;
-          LastIndex = item.indexTo;
-        } else {
-          item.indexFrom = LastIndex + 1;
-          item.indexTo = item.indexFrom + item.word.length - 1;
-          LastIndex = item.indexTo;
-        }
-      });
-      const temArray: Data = [wordsAndStatus, [], { CursorPosition: 0 }]; //temporary array to hold the data
-
-      /**
-       * @@explanation for the following action
-       * this will will convert data to array of char then push each char to the tempArray second Array
-       * as objects with background default value ""
-       */
-      data.quote.split("").forEach((item: string, index: number) => {
-        // pushing the char to the tempArray second Array
-        temArray[1].push({
-          char: item,
-          charColor: "text-gray-500",
-        });
-      });
-      setRoundCounter(roundCounter + 1);
-      setActiveWordWithIndex({ wordIndex: 0, wordDetail: temArray[0][0] }); // set the first active word as active after Data is loaded
-      /**
-       * @stateChange : this will change the state that contains the data
-       */
-      arg_state(temArray);
-    })
-    .catch(err => console.error(err));
+): Promise<void> => {
+  try {
+    const response = await fetch(`/api/typing/100`);
+    const data = await response.json();
+    const words = data.quote.split(" ");
+    const chars: CharAndColor[] = words.flatMap((word: string) =>
+      word.split("").map((char: string) => ({
+        char,
+        charColor: "text-gray-500",
+      }))
+    );
+    setMyText([words, chars, { CursorPosition: 0 }]);
+    setActiveWordWithIndex({
+      wordIndex: 0,
+      wordDetail: {
+        word: words[0],
+        indexFrom: 0,
+        indexTo: words[0].length - 1,
+      },
+    });
+    setRoundCounter(roundCounter + 1);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
 
-type CharAndColor = { char: string; charColor: string };
 // this function will calculate the wpm
-export const calculateWpm = (input: CharAndColor[], time: number) => {
-  let cpm = 0;
-  for (let i = 0; i < input.length; i++) {
-    if (input[i].charColor == "text-AAsecondary") {
-      cpm++;
-    } else if (input[i].charColor == "text-gray-500") {
-      break;
-    }
-  }
-  return Math.floor(Math.round((cpm / time) * 60) / 5);
+export const calculateWpm = (chars: CharAndColor[], timeInSeconds: number): number => {
+  const correctChars = chars.filter((char) => char.charColor === "text-AAsecondary").length;
+  const words = Math.floor(correctChars / 5);
+  const minutes = timeInSeconds / 60;
+  return Math.round(words / minutes);
 };
 
 // this function will calculate the accuracy
-export const calculateAccuracy = (input: CharAndColor[]) => {
-  let correct = 0;
-  let incorrect = 0;
-  for (let i = 0; i < input.length; i++) {
-    if (input[i].charColor == "text-AAsecondary") {
-      correct++;
-    } else if (input[i].charColor == "text-AAerror") {
-      incorrect++;
-    }
-  }
-  return Math.floor((correct * 100) / input.length);
+export const calculateAccuracy = (chars: CharAndColor[]): number => {
+  const totalChars = chars.length;
+  const correctChars = chars.filter((char) => char.charColor === "text-AAsecondary").length;
+  return Math.round((correctChars / totalChars) * 100);
 };
 
 // this will handle onCharChange event and will update the states
@@ -100,12 +55,12 @@ export const handleOnChangeInput = (
   input: string,
   event: React.ChangeEvent<HTMLInputElement>,
   activeWordWithIndex: ActiveWordWithIndex,
-  setActiveWordWithIndex:React.Dispatch<React.SetStateAction<ActiveWordWithIndex>>,
-  myText:Data,
-  setMyText:React.Dispatch<React.SetStateAction<Data>>,
-  setIsFinished:React.Dispatch<React.SetStateAction<boolean>>,
-  timerCountingInterval:React.MutableRefObject<undefined>,
-  updateStatistics:() => void,
+  setActiveWordWithIndex: React.Dispatch<React.SetStateAction<ActiveWordWithIndex>>,
+  myText: Data,
+  setMyText: React.Dispatch<React.SetStateAction<Data>>,
+  setIsFinished: React.Dispatch<React.SetStateAction<boolean>>,
+  timerCountingInterval: React.MutableRefObject<any>,
+  updateStatistics: () => void,
 ) => {
   /**
    * @nextForLoop
@@ -118,13 +73,13 @@ export const handleOnChangeInput = (
 
   // start validating from this index CharIndex initial
   let targetWordIndexIncrement = activeWordWithIndex.wordDetail.indexFrom;
-  input.split("").forEach((element, index) => {
+  input.split("").forEach((element) => {
     myText[1][targetWordIndexIncrement].charColor =
       element === myText[1][targetWordIndexIncrement].char ? "text-AAsecondary" : "text-AAError";
     targetWordIndexIncrement++;
   });
   // checks if input is equal to the active word ( true => set inputValue to "" )
-  if (input.localeCompare(activeWordWithIndex.wordDetail.word) == 0) {
+  if (input === activeWordWithIndex.wordDetail.word) {
     const nextWordIndex = activeWordWithIndex.wordIndex + 1;
     setActiveWordWithIndex({
       wordIndex: nextWordIndex,
@@ -138,14 +93,14 @@ export const handleOnChangeInput = (
    * @note : normal for loop is used here to break the loop
    */
   for (let i = 0; i < myText[1].length; i++) {
-    if (myText[1][i].charColor.localeCompare("text-gray-500") == 0) {
+    if (myText[1][i].charColor === "text-gray-500") {
       myText[2].CursorPosition = i;
       break;
     }
   }
   setMyText([...myText]); // update the state
   // Checking if the user finished typing by checking if the last char gray color is changed!
-  if (!(myText[1][myText[1].length - 1].charColor === "text-gray-500")) {
+  if (myText[1][myText[1].length - 1].charColor !== "text-gray-500") {
     console.log("Player Finished typing!!");
     updateStatistics(); // update statistics
     /**

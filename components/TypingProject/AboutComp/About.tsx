@@ -1,5 +1,34 @@
+import React from 'react';
 import Img from "..//Image/Img";
-export default function About() {
+
+interface AboutProps {
+  isBlackListed?: boolean;
+  userData?: {
+    ip: string;
+    city: string;
+    region: string;
+    country: string;
+    latitude: number;
+    longitude: number;
+    hasZipCode: boolean;
+  } | null;
+  gpuTier?: {
+    tier: number;
+    isMobile: boolean;
+  } | null;
+  mousePosition?: [number, number];
+  windowSize?: [number, number];
+  isLoading?: boolean;
+}
+
+export default function About({
+  isBlackListed = false,
+  userData = null,
+  gpuTier = null,
+  mousePosition = [0, 0],
+  windowSize = [0, 0],
+  isLoading = false,
+}: AboutProps) {
   return (
     <div
       className="w-full 2xl:px-96 xl:px-80 lg:px-64 md:px-28 px-12 

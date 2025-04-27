@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-
 // this will return min and sec Tens and Units example of of seconds is 180 sec return is [3,0,0]
-const getMinutesAndSeconds = (secondsCounts: number) => {
+const getMinutesAndSeconds = (secondsCounts: number): [number, number, number] => {
   if (secondsCounts >= 60) {
     const minutes = Math.floor(secondsCounts / 60);
     const secondsUnits = secondsCounts - minutes * 60;
@@ -22,17 +21,25 @@ const getMinutesAndSeconds = (secondsCounts: number) => {
     }
   }
 };
+
+interface TimerSpanProps {
+  setIsFinished: React.Dispatch<React.SetStateAction<boolean>>;
+  inputLostFocus: boolean;
+  seconds: React.MutableRefObject<number>;
+  timerCountingInterval: React.MutableRefObject<NodeJS.Timeout | undefined>;
+  updateStatistics: () => void;
+}
+
 export default function TimerSpan({
   setIsFinished,
   inputLostFocus,
   seconds,
   timerCountingInterval,
   updateStatistics,
-  
-}) {
+}: TimerSpanProps) {
   const [secondsState, setSecondsState] = useState<number>(seconds.current);
   const timerSpanRef = useRef<HTMLSpanElement>(null);
-  const [timerFinishedByItSelf,setTimerIsFinishedByItSelf] = useState<boolean>(false);
+  const [timerFinishedByItSelf, setTimerIsFinishedByItSelf] = useState<boolean>(false);
 
   useEffect(() => {
     if (inputLostFocus) {
@@ -57,13 +64,14 @@ export default function TimerSpan({
   }, [setIsFinished, inputLostFocus, seconds, timerCountingInterval]);
 
   useEffect(() => {
-    if (timerFinishedByItSelf == true) {
+    if (timerFinishedByItSelf === true) {
       setTimerIsFinishedByItSelf(false);
       updateStatistics();
       setIsFinished(true);
       clearInterval(timerCountingInterval.current);
     }
   }, [setIsFinished, timerCountingInterval, timerFinishedByItSelf, updateStatistics]);
+
   return (
     <>
       {secondsState <= 5 && (

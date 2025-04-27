@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
+import { motion } from "framer-motion";
 import { Link as ReactScrollLink } from "react-scroll";
 
 export default function DesktopMenu(props: { finishedLoading: boolean }) {
@@ -90,7 +90,7 @@ export default function DesktopMenu(props: { finishedLoading: boolean }) {
          &gt; 04. <span className="text-white  hover:cursor-pointer hover:text-AAsecondary duration-300">Contact</span>
         </ReactScrollLink>
       </motion.span>
-      <a href={"/saurabh-resume.pdf"} target={"_blank"} rel="noreferrer">
+      <a href={"/saurabh-resume.pdf.pdf"} target={"_blank"} rel="noreferrer">
       <motion.button
         initial={{
           y: -40,

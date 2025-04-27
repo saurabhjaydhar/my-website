@@ -1,38 +1,27 @@
 import "../styles/globals.css";
 import { Analytics } from '@vercel/analytics/react';
-import AppContext from "../components/AppContextFolder/AppContext";
+import AppContext, { AppState, defaultState } from "../components/AppContextFolder/AppContext";
 import { useRef, useState } from "react";
+import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }) {
-  const timerCookie = useRef(null);
-  const windowSizeTrackerRef = useRef(null);
-  const mousePositionRef = useRef(null);
-  const [sharedState, setSharedState] = useState({
-    portfolio: {
-      NavBar: {
-        IntervalEvent: null,
-        scrolling: null,
-        scrollSizeY: null,
-      },
-      Scrolling:{
-        IntervalEvent:null
-      }
-    },
+function MyApp({ Component, pageProps }: AppProps) {
+  const timerCookie = useRef<number | null>(null);
+  const windowSizeTrackerRef = useRef<((this: Window, ev: UIEvent) => void) | null>(null);
+  const mousePositionRef = useRef<((this: Window, ev: MouseEvent) => void) | null>(null);
+  
+  const [sharedState, setSharedState] = useState<AppState>({
+    ...defaultState,
     userdata: {
       timerCookieRef: timerCookie,
       windowSizeTracker: windowSizeTrackerRef,
       mousePositionTracker: mousePositionRef,
     },
-    typing: {
-      keyboardEvent: null,
-      eventInputLostFocus: null,
-    },
-    finishedLoading: false,
   });
+
   return (
     <AppContext.Provider value={{ sharedState, setSharedState }}>
       <Component {...pageProps} />
-      {/* <Analytics /> */}
+      <Analytics />
     </AppContext.Provider>
   );
 }

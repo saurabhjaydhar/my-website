@@ -1,34 +1,32 @@
-import React from "react";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
-export default function ThisCantBeReached() {
-  const [ShowText, setShowText] = React.useState(false);
-  let CenterWidth = 0;
-  let CenterHeight = 0;
-  React.useEffect(() => {
-    setTimeout(function () {
-      setShowText(true);
-    }, 1000);
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+
+const ThisCantBeReached: React.FC = () => {
+  const [ShowText, setShowText] = useState(false);
+  const centerHeightRef = useRef<number>(0);
+  const centerWidthRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if(window.innerHeight>640){
+        centerHeightRef.current = (window.innerHeight)/2-160-20;
+      }else{
+        centerHeightRef.current = (window.innerHeight)/2-64-20;
+      }
+      if(window.innerWidth>1280){
+        centerWidthRef.current = (window.innerWidth)/2-384-18;
+      }else if(window.innerWidth>1024){
+        centerWidthRef.current = (window.innerWidth)/2-192-18;
+      }else if(window.innerWidth>768){
+        centerWidthRef.current = (window.innerWidth)/2-144-18;
+      }else if(window.innerWidth>640){
+        centerWidthRef.current = (window.innerWidth)/2-96-18;
+      }else{
+        centerWidthRef.current = (window.innerWidth)/2-16-18;
+      }
+    }
   }, []);
-  if (typeof window !== "undefined") {
-    if(window.innerHeight>640){
-      CenterHeight = (window.innerHeight)/2-160-20;
-    }else{
-      CenterHeight = (window.innerHeight)/2-64-20;
-    }
-    if(window.innerWidth>1280){
-      CenterWidth = (window.innerWidth)/2-384-18;
-    }else if(window.innerWidth>1024){
-      CenterWidth = (window.innerWidth)/2-192-18;
-    }else if(window.innerWidth>768){
-      CenterWidth = (window.innerWidth)/2-144-18;
-    }else if(window.innerWidth>640){
-      CenterWidth = (window.innerWidth)/2-96-18;
-    }else{
-      CenterWidth = (window.innerWidth)/2-16-18;
-    }
-    
-  }
- 
+
   return (
     <motion.div
       initial={{ opacity: 1 }}
@@ -44,7 +42,7 @@ export default function ThisCantBeReached() {
         {/* Icon for Desktop and Table */}
         
         <motion.div 
-        animate={{y:CenterHeight,x:CenterWidth,scale:2}}
+        animate={{y:centerHeightRef.current,x:centerWidthRef.current,scale:2}}
         transition={{delay:2,duration:1}}
         className="relative w-9 h-10 ">
           <div className="absolute h-1 w-1/2 bg-gray-600"></div>
@@ -158,8 +156,8 @@ export default function ThisCantBeReached() {
         {/* ! Hello animation text */}
         </motion.div>
             <motion.span
-            initial={{y:CenterHeight+50-20,x:CenterWidth-13,opacity:0}}
-            animate={{y:CenterHeight+50,opacity:1}}
+            initial={{y:centerHeightRef.current+50-20,x:centerWidthRef.current-13,opacity:0}}
+            animate={{y:centerHeightRef.current+50,opacity:1}}
             transition={{delay:3.5,duration:0.3}}
             className="absolute font-bold text-gray-600 text-2xl">
               Hello!
@@ -244,10 +242,12 @@ export default function ThisCantBeReached() {
         transition={{ opacity: { delay: 2, duration: 0.5 } }}
         className=""
       >
-        <button className="px-4 py-2 bg-blue-500 rounded text-white sm:text-base text-sm">
+        <button className="px-4 py-2 bg-blue-500 rounded text-white sm:text-base text-sm" onClick={() => setShowText(!ShowText)}>
           {ShowText ? "Start" : "Reload"}
         </button>
       </motion.div>
     </motion.div>
   );
-}
+};
+
+export default ThisCantBeReached;
